@@ -1,0 +1,7 @@
+{
+    "nome": "New York Rest",
+    "taxaFrete": -20,
+    "cozinha":{
+        "id": 1
+    }
+}

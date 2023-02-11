@@ -1,0 +1,57 @@
+package com.algaworks.algafoods.api.exceptionhandler;
+
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
+import lombok.Getter;
+
+@JsonInclude(Include.NON_NULL)// Só inclua na representação se não for nulo
+@Getter
+@Builder
+@ApiModel("Problema")
+public class Problem {
+	
+	@ApiModelProperty(example = "400",position = 1)//Position significa a posição da represntação
+	private Integer status;
+
+	@ApiModelProperty(example = "https://algafood.com.br/erro-negocio",position = 10)//Position não funciona no OpenApi 3.0.0
+	private String type;
+
+	@ApiModelProperty(example = "Violação de regra de negócio",position = 20)
+	private String title;
+
+	@ApiModelProperty(example = "Não existe um cadastro de estado com codigo 1",position = 30)
+	private String detail;
+
+	@ApiModelProperty(example = "Não existe um cadastro de estado com codigo 1",position = 35)
+	private String userMessage;
+
+	@ApiModelProperty(example = "2021-11-14T00:12:13",position = 40)
+	private OffsetDateTime timestamp; //Estava LocalDateTime
+
+	@ApiModelProperty(value="Objetos ou campos que geraram o erro",position = 100)
+	private List<Object> objects ;
+	
+	@ApiModel("ObjetoProblema")
+	@Getter
+	@Builder
+	public static class Object {
+		
+		@ApiModelProperty(example = "Estado")
+		private String name;
+		
+		@ApiModelProperty(example = "Estado não encontrado")
+		private String userMessage;
+	}
+	
+	
+	
+
+}
